@@ -12,6 +12,8 @@ namespace Websjop.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<ProductCatergory>().HasKey(pc => new { pc.ProductId, pc.CategoryId });
+
             modelBuilder.Entity<Product>().HasData(
                 new Product
                 {
@@ -55,12 +57,28 @@ namespace Websjop.Database
                 }
             );
 
-            modelBuilder.Entity<Product>().HasMany(p => p.Categories).WithMany(p => p.Products).UsingEntity(ch => ch.HasData(
-                new { ProductsId = 1, CategoriesId = 1},
-                new { ProductsId = 2, CategoriesId = 1},
-                new { ProductsId = 2, CategoriesId = 2},
-                new { ProductsId = 3, CategoriesId = 1}
-            ));
+            modelBuilder.Entity<ProductCatergory>().HasData(
+                new ProductCatergory
+                {
+                    CategoryId = 1,
+                    ProductId = 1,
+                },
+                new ProductCatergory
+                {
+                    CategoryId = 1,
+                    ProductId = 2,
+                },
+                new ProductCatergory
+                {
+                    CategoryId = 2,
+                    ProductId = 2,
+                },
+                new ProductCatergory
+                {
+                    CategoryId = 1,
+                    ProductId = 3,
+                }
+            );
         }
     }
 }

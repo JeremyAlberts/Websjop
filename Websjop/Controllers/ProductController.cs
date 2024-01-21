@@ -18,7 +18,7 @@ namespace Websjop.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> Index()
         {
-            var products = await _context.Product.ToListAsync();
+            var products = await _context.Product.Include(many => many.Categories).ToListAsync();
 
             return Ok(products);
         }
