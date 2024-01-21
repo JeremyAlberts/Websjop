@@ -7,7 +7,8 @@ namespace Websjop.Database
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options){}
 
-        DbSet<Product> Products {  get; set; }
+        public DbSet<Product> Product {  get; set; }
+        public DbSet<Category> Catergory { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -40,6 +41,26 @@ namespace Websjop.Database
                     CreatedDate = DateTime.Now
                 }
             );
+
+            modelBuilder.Entity<Category>().HasData(
+                new Category 
+                { 
+                    Id = 1, 
+                    Name = "Crafts" 
+                },
+                new Category
+                {
+                    Id = 2,
+                    Name = "Anime"
+                }
+            );
+
+            modelBuilder.Entity<Product>().HasMany(p => p.Categories).WithMany(p => p.Products).UsingEntity(ch => ch.HasData(
+                new { ProductsId = 1, CategoriesId = 1},
+                new { ProductsId = 2, CategoriesId = 1},
+                new { ProductsId = 2, CategoriesId = 2},
+                new { ProductsId = 3, CategoriesId = 1}
+            ));
         }
     }
 }

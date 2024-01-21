@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Websjop.Database;
 
@@ -11,9 +12,11 @@ using Websjop.Database;
 namespace Websjop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240121200735_AddCategoryManyToMany")]
+    partial class AddCategoryManyToMany
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,28 +38,6 @@ namespace Websjop.Migrations
                     b.HasIndex("ProductsId");
 
                     b.ToTable("CategoryProduct");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoriesId = 1,
-                            ProductsId = 1
-                        },
-                        new
-                        {
-                            CategoriesId = 1,
-                            ProductsId = 2
-                        },
-                        new
-                        {
-                            CategoriesId = 2,
-                            ProductsId = 2
-                        },
-                        new
-                        {
-                            CategoriesId = 1,
-                            ProductsId = 3
-                        });
                 });
 
             modelBuilder.Entity("Websjop.Models.Category", b =>
@@ -74,18 +55,6 @@ namespace Websjop.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Category");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Crafts"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Anime"
-                        });
                 });
 
             modelBuilder.Entity("Websjop.Models.Product", b =>
@@ -118,13 +87,13 @@ namespace Websjop.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Product");
+                    b.ToTable("Products");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 1, 21, 21, 51, 23, 977, DateTimeKind.Local).AddTicks(1771),
+                            CreatedDate = new DateTime(2024, 1, 21, 21, 7, 34, 982, DateTimeKind.Local).AddTicks(9024),
                             Description = "A cute sticker pack that can be used anywhere!",
                             Name = "Cute Sticker Pack",
                             Price = 4.75m,
@@ -134,7 +103,7 @@ namespace Websjop.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 1, 21, 21, 51, 23, 977, DateTimeKind.Local).AddTicks(1812),
+                            CreatedDate = new DateTime(2024, 1, 21, 21, 7, 34, 982, DateTimeKind.Local).AddTicks(9074),
                             Description = "Ryouiki Tenkai: Fukuma Mizushi!",
                             Name = "Jujutsu Kaisen T-shirt",
                             Price = 19.99m,
@@ -144,7 +113,7 @@ namespace Websjop.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 1, 21, 21, 51, 23, 977, DateTimeKind.Local).AddTicks(1814),
+                            CreatedDate = new DateTime(2024, 1, 21, 21, 7, 34, 982, DateTimeKind.Local).AddTicks(9076),
                             Description = "Perfect present for your loved one!",
                             Name = "Cricut Joy",
                             Price = 209.99m,
