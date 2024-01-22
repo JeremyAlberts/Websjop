@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Websjop.Database;
 
@@ -11,9 +12,11 @@ using Websjop.Database;
 namespace Websjop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240122100156_TableNamingAndCollection")]
+    partial class TableNamingAndCollection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,12 +28,10 @@ namespace Websjop.Migrations
             modelBuilder.Entity("CategoryProduct", b =>
                 {
                     b.Property<int>("CategoriesId")
-                        .HasColumnType("int")
-                        .HasColumnName("CategoryId");
+                        .HasColumnType("int");
 
                     b.Property<int>("ProductsId")
-                        .HasColumnType("int")
-                        .HasColumnName("ProductId");
+                        .HasColumnType("int");
 
                     b.HasKey("CategoriesId", "ProductsId");
 
@@ -104,7 +105,7 @@ namespace Websjop.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 1, 22, 19, 44, 23, 178, DateTimeKind.Local).AddTicks(7911),
+                            CreatedDate = new DateTime(2024, 1, 22, 11, 1, 56, 541, DateTimeKind.Local).AddTicks(3893),
                             Description = "A cute sticker pack that can be used anywhere!",
                             Name = "Cute Sticker Pack",
                             Price = 4.75m,
@@ -114,7 +115,7 @@ namespace Websjop.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 1, 22, 19, 44, 23, 178, DateTimeKind.Local).AddTicks(7949),
+                            CreatedDate = new DateTime(2024, 1, 22, 11, 1, 56, 541, DateTimeKind.Local).AddTicks(3931),
                             Description = "Ryouiki Tenkai: Fukuma Mizushi!",
                             Name = "Jujutsu Kaisen T-shirt",
                             Price = 19.99m,
@@ -124,7 +125,7 @@ namespace Websjop.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 1, 22, 19, 44, 23, 178, DateTimeKind.Local).AddTicks(7952),
+                            CreatedDate = new DateTime(2024, 1, 22, 11, 1, 56, 541, DateTimeKind.Local).AddTicks(3933),
                             Description = "Perfect present for your loved one!",
                             Name = "Cricut Joy",
                             Price = 209.99m,

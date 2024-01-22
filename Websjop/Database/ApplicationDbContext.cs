@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Websjop.Models;
 
 namespace Websjop.Database
@@ -12,7 +13,15 @@ namespace Websjop.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ProductCatergory>().HasKey(pc => new { pc.ProductId, pc.CategoryId });
+            modelBuilder.Entity<Product>()
+               .HasMany(e => e.Categories)
+               .WithMany(e => e.Products)
+               .UsingEntity(
+                   j =>
+                   {
+                       j.Property("ProductsId").HasColumnName("ProductId");
+                       j.Property("CategoriesId").HasColumnName("CategoryId");
+                   });
 
             modelBuilder.Entity<Product>().HasData(
                 new Product
@@ -54,29 +63,6 @@ namespace Websjop.Database
                 {
                     Id = 2,
                     Name = "Anime"
-                }
-            );
-
-            modelBuilder.Entity<ProductCatergory>().HasData(
-                new ProductCatergory
-                {
-                    CategoryId = 1,
-                    ProductId = 1,
-                },
-                new ProductCatergory
-                {
-                    CategoryId = 1,
-                    ProductId = 2,
-                },
-                new ProductCatergory
-                {
-                    CategoryId = 2,
-                    ProductId = 2,
-                },
-                new ProductCatergory
-                {
-                    CategoryId = 1,
-                    ProductId = 3,
                 }
             );
         }
