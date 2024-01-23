@@ -65,6 +65,8 @@ namespace Websjop.Database
                     Name = "Anime"
                 }
             );
+
+
         }
     }
 }

@@ -16,9 +16,18 @@ namespace Websjop.Controllers
 
         [HttpGet(Name = "GetAllProducts")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> GetProducts()
         {
             var products = await _context.Product.Include(many => many.Categories).ToListAsync();
+
+            return Ok(products);
+        }
+
+        [HttpGet("{id:int}", Name = "GetAllProductsPerCategory")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult> GetProductsPerCategory(int id)
+        {
+            var products = await _context.Product.Include(many => many.Categories).Where(c => c.Categories.Any(k => k.Id == id)).ToListAsync();
 
             return Ok(products);
         }
